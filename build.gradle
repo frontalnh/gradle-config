@@ -23,3 +23,35 @@ task zip(type: Zip, group: "Archive", description: "Archive sources in a zip fil
     from "src"
     setArchiveName "basic-demo-1.0.zip"
 }
+
+task hello{
+    ext.myProperty = 'myValue'
+
+    doLast{
+        String someString = 'namhoon'
+        println 'hello'
+        println "Hello, ${someString}"
+    }
+}
+
+def words = ["Namhoon"]
+
+words.each{word->
+    task "hello${word}"{
+        dependsOn hello
+
+        doLast{
+            println "Hello, $word"
+        }
+    }
+}
+
+4.times{ counter->
+    task "count${counter}"{
+        doLast{
+            println "count ${counter}"
+            println "My Property ${hello.myProperty}"
+        }
+    }
+
+}
