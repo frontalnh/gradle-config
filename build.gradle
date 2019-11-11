@@ -34,6 +34,19 @@ task hello{
     }
 }
 
+task copyManyFiles(type: Copy, group: "Copy"){
+    from "./src/dist/toBeCopied1", "./src/dist/toBeCopied2"
+    include "*.txt"
+    into "./build/copied"
+}
+
+task execTask(type: Exec){
+    commandLine "git", "branch"
+    doFirst{
+        println "hello this is exec task"
+    }
+}
+
 def words = ["Namhoon"]
 
 words.each{word->
