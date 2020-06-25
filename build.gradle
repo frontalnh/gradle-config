@@ -50,7 +50,7 @@ task execTask(type: Exec){
 def words = ["Namhoon"]
 
 words.each{word->
-    task "hello${word}"{
+    task "hello$word"{
         dependsOn hello
 
         doLast{
@@ -68,3 +68,10 @@ words.each{word->
     }
 
 }
+
+task callCount1{
+    print("Calling task count1")
+    tasks.count1.execute()
+}
+
+println "$tasks"
